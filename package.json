@@ -1,0 +1,34 @@
+{
+  "name": "nimbus",
+  "version": "1.0.0",
+  "description": "A cute pixel weather desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.nimbus.weather",
+    "productName": "Nimbus",
+    "icon": "assets/nimbus_logo.png",
+    "mac": {
+      "icon": "assets/nimbus_logo.png",
+      "category": "public.app-category.weather"
+    },
+    "win": {
+      "icon": "assets/nimbus_logo.png"
+    },
+    "linux": {
+      "icon": "assets/nimbus_logo.png"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/*/{test,tests,spec,specs}/**",
+      "!.git/**"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0"
+  }
+}

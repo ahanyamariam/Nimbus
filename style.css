@@ -1,0 +1,385 @@
+/* =============================================
+   NIMBUS — Pixel Weather App Styles
+   
+   🎨 COLOUR GUIDE (search these labels to swap):
+   --col-sky:       Landing page sky blue
+   --col-night:     Weather page dark background
+   --col-box-dark:  Dark box fill colour
+   --col-grid:      Grid line colour (soft white overlay)
+   --col-text:      Main white text
+   --col-accent:    Accent / highlight colour (currently light blue)
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --col-sky: #5bb8f5;         /* 🎨 Landing background sky blue */
+  --col-night: #0d1b3e;       /* 🎨 Weather page dark navy */
+  --col-box-dark: #0a1628ee;  /* 🎨 Box fill — dark navy with slight transparency */
+  --col-box-bottom: #080808cc;/* 🎨 Bottom forecast box fill */
+  --col-grid: rgba(255,255,255,0.08); /* 🎨 Grid line colour — soft white */
+  --col-text: #ffffff;
+  --col-accent: #a8d8ff;      /* 🎨 Accent colour — pale blue */
+  --col-shadow: rgba(0,0,0,0.6);
+  --border-white: 2px solid #ffffff;
+  --drop-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+  --grid-size: 16px;           /* 🎨 Grid cell size — 16px = classic pixel grid */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 360px;
+  height: 480px;
+  overflow: hidden;
+  font-family: 'Pixelify Sans', monospace;
+  color: var(--col-text);
+  cursor: default;
+  -webkit-app-region: no-drag;
+  background: transparent;
+  border-radius: 4px;
+}
+
+/* =============================================
+   GRID OVERLAY — sits on top of everything
+   ============================================= */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  width: 360px;
+  height: 480px;
+  pointer-events: none;
+  z-index: 100;
+  background-image:
+    linear-gradient(var(--col-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--col-grid) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: 0 0;
+}
+
+/* =============================================
+   CLOSE BUTTON
+   ============================================= */
+#close-btn {
+  position: fixed;
+  top: 8px;
+  right: 10px;
+  z-index: 200;
+  background: transparent;
+  border: none;
+  color: var(--col-text);
+  font-size: 14px;
+  font-family: 'Pixelify Sans', monospace;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+  -webkit-app-region: no-drag;
+}
+#close-btn:hover { opacity: 1; }
+
+/* =============================================
+   PAGES
+   ============================================= */
+.page {
+  position: absolute;
+  inset: 0;
+  width: 360px;
+  height: 480px;
+  display: none;
+  overflow: hidden;
+  -webkit-app-region: drag;  /* whole window is draggable */
+}
+.page.active { display: block; }
+
+/* =============================================
+   BACKGROUND LAYER
+   ============================================= */
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bg-gif {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* =============================================
+   LANDING PAGE
+   ============================================= */
+.landing-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 28px 24px 32px;
+  -webkit-app-region: drag;
+}
+
+.app-title {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #ffffff;
+  text-shadow:
+    3px 3px 0px rgba(0,0,0,0.3),
+    -1px -1px 0 rgba(0,0,0,0.1);
+  /* 🎨 Title text colour — white with dark drop shadow */
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+/* Cloud placeholder — remove when you add real gifs */
+.clouds-area {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cloud-placeholder {
+  position: absolute;
+  color: white;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+  opacity: 0.9;
+  animation: float 3s ease-in-out infinite alternate;
+  /* Replace this div with <img src="assets/gifs/cloud.gif"> */
+}
+.cloud-placeholder.large { font-size: 64px; animation-duration: 4s; }
+.cloud-placeholder.medium { font-size: 48px; animation-duration: 3s; animation-delay: 0.5s; }
+.cloud-placeholder.small { font-size: 32px; animation-duration: 2.5s; animation-delay: 1s; }
+
+@keyframes float {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-10px); }
+}
+
+/* =============================================
+   SHARED PIXEL BUTTON
+   ============================================= */
+.pixel-btn {
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  /* 🎨 BUTTON: White border, transparent fill, drop shadow */
+  background: rgba(0, 0, 0, 0.25);
+  border: var(--border-white);
+  box-shadow: var(--drop-shadow);
+  padding: 10px 24px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: transform 0.1s, box-shadow 0.1s;
+  -webkit-app-region: no-drag;
+  image-rendering: pixelated;
+}
+
+.pixel-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.1);
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+}
+
+.back-btn {
+  font-size: 13px;
+  padding: 6px 16px;
+  align-self: flex-start;
+}
+
+/* =============================================
+   WEATHER PAGE
+   ============================================= */
+.weather-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 20px 16px;
+  height: 100%;
+  -webkit-app-region: drag;
+}
+
+/* =============================================
+   PIXEL BOX — shared style for boxes
+   ============================================= */
+.pixel-box {
+  border: var(--border-white);
+  box-shadow: var(--drop-shadow);
+  padding: 12px 14px;
+  -webkit-app-region: no-drag;
+}
+
+/* =============================================
+   TEMP BOX (top box)
+   ============================================= */
+.temp-box {
+  background: var(--col-box-dark);
+  /* 🎨 TOP BOX: Dark navy fill, white border, 4px drop shadow */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.temp-icon-area {
+  display: flex;
+  align-items: center;
+}
+
+.pixel-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.temp-main {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 2px;
+  /* 🎨 Main temperature text — white, large */
+}
+
+.temp-divider {
+  width: 2px;
+  height: 28px;
+  background: rgba(255,255,255,0.3);
+  margin: 0 4px;
+}
+
+.feels-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feels-label {
+  font-size: 11px;
+  color: var(--col-accent);
+  /* 🎨 "Feels like" label — pale blue accent */
+  line-height: 1.2;
+}
+
+.temp-feels {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* =============================================
+   WEATHER LABEL
+   ============================================= */
+.weather-label {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+  /* 🎨 Weather condition label — white with shadow */
+  padding-left: 2px;
+}
+
+/* =============================================
+   TIME DISPLAY
+   ============================================= */
+.time-display {
+  font-size: 13px;
+  color: var(--col-accent);
+  /* 🎨 Time text — pale blue accent */
+  padding-left: 2px;
+  letter-spacing: 1px;
+  margin-top: -4px;
+}
+
+/* =============================================
+   FORECAST BOX (bottom box)
+   ============================================= */
+.forecast-box {
+  background: var(--col-box-bottom);
+  /* 🎨 FORECAST BOX: Near-black semi-transparent, white border, drop shadow */
+  margin-top: auto;
+}
+
+.forecast-header {
+  font-size: 14px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.forecast-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  /* 🖼️ Replace src in HTML with your pixel clock icon */
+}
+
+.icon-fallback-inline { font-size: 14px; }
+
+.forecast-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.forecast-hour {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: #ffffff;
+  /* 🎨 Forecast hour temps — white */
+}
+
+.forecast-weather-icon {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+  /* 🖼️ Replace with <img> pixel icons per weather type once you have assets */
+}
+
+/* =============================================
+   LOADING STATE
+   ============================================= */
+.loading-pulse {
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}
+
+/* =============================================
+   WEATHER BACKGROUNDS
+   Each weather type sets a different bg colour.
+   Replace with your GIFs — comments show which.
+   ============================================= */
+
+/* 🎨 SUNNY:  warm golden yellow */
+body.weather-sunny   #weather-bg { background-color: #f5a623; }
+/* 🎨 CLOUDY: dark blue-grey */
+body.weather-cloudy  #weather-bg { background-color: #2c3e6b; }
+/* 🎨 RAINY:  deep slate blue */
+body.weather-rainy   #weather-bg { background-color: #1a2a4a; }
+/* 🎨 WINDY:  teal-grey */
+body.weather-windy   #weather-bg { background-color: #2a4a4a; }
+/* 🎨 COLD:   icy blue-white */
+body.weather-cold    #weather-bg { background-color: #1a3a5c; }

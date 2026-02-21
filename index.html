@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nimbus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!--  CLOSE BUTTON  -->
+  <button id="close-btn" onclick="closeApp()">✕</button>
+
+  <!--  GRID OVERLAY  -->
+  <div class="grid-overlay"></div>
+
+  <!--  PAGE: LANDING  -->
+  <div id="page-landing" class="page active">
+
+    <div class="bg-layer" id="landing-bg">
+      <img src="assets/bg.jpg" class="bg-gif" />
+    </div>
+
+    <div class="landing-content">
+      <h1 class="app-title">NIMBUS</h1>
+
+<button class="pixel-btn" onclick="fetchWeather()">
+        what's the weather?
+      </button>
+    </div>
+  </div>
+
+  <!--  PAGE: WEATHER  -->
+  <div id="page-weather" class="page">
+
+    <div class="bg-layer" id="weather-bg">
+      <img id="weather-bg-gif" src="" class="bg-gif" />
+    </div>
+
+    <div class="weather-content">
+
+      <!-- TOP BOX: Temp + Feels Like -->
+      <div class="pixel-box temp-box">
+        <div class="temp-icon-area">
+          <span class="pixel-icon">🌡️</span>
+        </div>
+        <div class="temp-main" id="temp-display">--°C</div>
+        <div class="temp-divider"></div>
+        <div class="feels-section">
+          <div class="feels-label">Feels like</div>
+          <div class="temp-feels" id="feels-display">--°C</div>
+        </div>
+      </div>
+
+      <!-- WEATHER LABEL -->
+      <div class="weather-label" id="weather-label">Loading...</div>
+
+      <!-- TIME -->
+      <div class="time-display" id="time-display">--:--</div>
+
+      <!-- BOTTOM BOX: Hourly Forecast -->
+      <div class="pixel-box forecast-box">
+        <div class="forecast-header">
+          <span class="pixel-icon">🕐</span>
+          Hourly Forecast
+        </div>
+        <div class="forecast-row" id="forecast-temps"></div>
+        <div class="forecast-row" id="forecast-icons"></div>
+      </div>
+
+    
+      <!-- BACK BUTTON -->
+      <button class="pixel-btn back-btn" onclick="goBack()">← back</button>
+
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
