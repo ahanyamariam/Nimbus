@@ -32,7 +32,7 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
   mainWindow.setMovable(true);
-  mainWindow.webContents.openDevTools({ mode: 'detach' }); // remove after debugging
+  
 }
 
 app.whenReady().then(createWindow);
